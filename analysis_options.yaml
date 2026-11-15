@@ -1,0 +1,7 @@
+# Reglas recomendadas por el equipo de Flutter. Si una te molesta, no la apagués:
+# leé por qué existe en https://dart.dev/tools/linter-rules
+analyzer:
+  exclude:
+    - build/**
+    - web/**
+include: package:flutter_lints/flutter.yaml

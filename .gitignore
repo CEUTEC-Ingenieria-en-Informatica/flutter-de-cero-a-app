@@ -1,0 +1,16 @@
+# Lo que genera Flutter al compilar o al bajar paquetes
+.dart_tool/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.metadata
+*.iml
+.idea/
+
+# Carpetas de plataforma que aparecen si corrés `flutter create .` para ver las apps en pantalla.
+# Son tuyas, no hace falta subirlas.
+android/
+ios/
+windows/
+linux/
+macos/

@@ -1,0 +1,19 @@
+name: flutter_de_cero_a_app
+description: Curso de Flutter por módulos, de Dart a una app completa. Comunidad estudiantil, no oficial.
+publish_to: none
+version: 1.0.0
+
+environment:
+  sdk: ^3.8.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true

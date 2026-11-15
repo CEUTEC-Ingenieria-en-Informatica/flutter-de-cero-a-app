@@ -1,0 +1,50 @@
+# Revisa el curso en cada push y en cada pull request.
+#
+# En TU copia (hecha con "Use this template" o con fork) revisa tus ejercicios:
+#   flutter analyze y flutter test, lo mismo que corrés en tu compu.
+# En el repo de la organización los ejercicios están vacíos a propósito, así que revisa
+# que el curso esté sano: cada test falla con su esqueleto y todo pasa con las soluciones.
+#
+# Flutter se instala clonando el repo oficial en un tag fijo del canal stable.
+# Si cambiás la versión, que sea la misma que dice el README.
+name: Revisar
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  FLUTTER_VERSION: "3.47.9"
+
+jobs:
+  revisar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      # actions/checkout v7.0.1, fijada por commit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+      - name: Instalar Flutter ${{ env.FLUTTER_VERSION }} desde github.com/flutter/flutter
+        run: |
+          git clone --depth 1 --branch "$FLUTTER_VERSION" https://github.com/flutter/flutter.git "$RUNNER_TEMP/flutter"
+          echo "$RUNNER_TEMP/flutter/bin" >> "$GITHUB_PATH"
+
+      - name: Preparar Flutter
+        run: |
+          flutter config --no-analytics
+          flutter --version
+          flutter pub get
+
+      - name: Revisar el estilo del código (flutter analyze)
+        run: flutter analyze
+
+      - name: Revisar el curso (repo de la organización)
+        if: github.repository == 'CEUTEC-Ingenieria-en-Informatica/flutter-de-cero-a-app'
+        run: bash herramientas/verificar_curso.sh
+
+      - name: Revisar tus ejercicios (tu copia)
+        if: github.repository != 'CEUTEC-Ingenieria-en-Informatica/flutter-de-cero-a-app'
+        run: flutter test
